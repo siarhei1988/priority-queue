@@ -1,47 +1,47 @@
-// const Queue = require('../src/queue');
-// const MaxHeap = require('../src/max-heap');
+const Queue = require('../src/queue');
+const MaxHeap = require('../src/max-heap');
 
-// describe('PriorityQueue', () => {
-// 	describe('#constructor', () => {
-// 		it('assings passed maxSize or set it to default value 30', () => {
-// 			const q = new Queue(10);
-// 			const qWithDefaultMaxSize = new Queue();
+describe('PriorityQueue', () => {
+	describe('#constructor', () => {
+		it('assings passed maxSize or set it to default value 30', () => {
+			const q = new Queue(10);
+			const qWithDefaultMaxSize = new Queue();
 
-// 			expect(q.maxSize).to.equal(10);
-// 			expect(qWithDefaultMaxSize.maxSize).to.equal(30);
-// 		});
+			expect(q.maxSize).to.equal(10);
+			expect(qWithDefaultMaxSize.maxSize).to.equal(30);
+		});
 
-// 		it('assings new MaxHeap to this.heap', () => {
-// 			const q = new Queue();
+		it('assings new MaxHeap to this.heap', () => {
+			const q = new Queue();
 
-// 			expect(q.heap).to.be.instanceof(MaxHeap);
-// 		});
-// 	});
+			expect(q.heap).to.be.instanceof(MaxHeap);
+		});
+	});
 
-// 	describe('#push', () => {
-// 		let q;
+	describe('#push', () => {
+		let q;
 
-// 		beforeEach(() => {
-// 			q = new Queue(3);
-// 		});
+		beforeEach(() => {
+			q = new Queue(3);
+		});
 
-// 		it('calls heap.push with passed data and priority', () => {
-// 			sinon.spy(q.heap, 'push');
+		// it('calls heap.push with passed data and priority', () => {
+		// 	sinon.spy(q.heap, 'push');
 
-// 			q.push(0, 1);
-// 			expect(q.heap.push).to.have.been.calledWith(0, 1);
-// 		});
+		// 	q.push(0, 1);
+		// 	expect(q.heap.push).to.have.been.calledWith(0, 1);
+		// });
 
-// 		it('throws an error if queue has max size', () => {
-// 			q.push(0, 1);
-// 			q.push(1, 2);
-// 			q.push(2, 3);
+		// it('throws an error if queue has max size', () => {
+		// 	q.push(0, 1);
+		// 	q.push(1, 2);
+		// 	q.push(2, 3);
 
-// 			expect(() => {
-// 				q.push(3, 4);
-// 			}).to.throw();
-// 		});
-// 	});
+		// 	expect(() => {
+		// 		q.push(3, 4);
+		// 	}).to.throw();
+		// });
+	});
 
 // 	describe('#shift', () => {
 // 		let q;
@@ -139,4 +139,4 @@
 // 			expect(q.isEmpty()).to.equal(true);
 // 		});
 // 	});
-// });
+});

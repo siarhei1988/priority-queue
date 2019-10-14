@@ -202,9 +202,8 @@ describe('Node', () => {
 			childOfLeft.swapWithParent();
 			childOfRight.swapWithParent();
 
-			console.log(root);
-			// expect(root.left).to.equal(childOfLeft);
-			// expect(root.right).to.equal(childOfRight);
+			expect(root.left).to.equal(childOfLeft);
+			expect(root.right).to.equal(childOfRight);
 		});
 	});
 });
