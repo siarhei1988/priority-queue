@@ -271,39 +271,39 @@ describe('MaxHeap', () => {
 // 		});
 // 	});
 
-// 	describe('#detachRoot', () => {
-// 		let h;
+	describe('#detachRoot', () => {
+		let h;
 
-// 		beforeEach(() => {
-// 			h = new MaxHeap();
-// 		});
+		beforeEach(() => {
+			h = new MaxHeap();
+		});
 
-// 		it('assigns null to this.root', () => {
-// 			h.push(42, 15);
-// 			h.detachRoot();
+		it('assigns null to this.root', () => {
+			h.push(42, 15);
+			h.detachRoot();
 
-// 			expect(h.root).to.equal(null);
-// 		});
+			expect(h.root).to.equal(null);
+		});
 
-// 		it('removes root from parentNodes', () => {
-// 			h.push(42, 15);
-// 			h.push(15, 42);
+		it('removes root from parentNodes', () => {
+			h.push(42, 15);
+			h.push(15, 42);
 
-// 			h.detachRoot();
+			h.detachRoot();
 
-// 			expect(h.parentNodes[0].data).to.equal(42);
-// 			expect(h.parentNodes[0].priority).to.equal(15);
-// 		});
+			expect(h.parentNodes[0].data).to.equal(42);
+			expect(h.parentNodes[0].priority).to.equal(15);
+		});
 
-// 		it('returns detached root', () => {
-// 			h.push(42, 15);
+		it('returns detached root', () => {
+			h.push(42, 15);
 
-// 			const expected = h.root;
-// 			const actual = h.detachRoot();
+			const expected = h.root;
+			const actual = h.detachRoot();
 
-// 			expect(actual).to.equal(expected);
-// 		});
-// 	});
+			expect(actual).to.equal(expected);
+		});
+	});
 
 // 	describe('#restoreRootFromLastInsertedNode', () => {
 // 		let h;
