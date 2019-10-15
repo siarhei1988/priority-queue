@@ -128,73 +128,74 @@ describe('MaxHeap', () => {
 		});
 	});
 
-// 	describe('#shiftNodeUp', () => {
-// 		let h;
+	describe('#shiftNodeUp', () => {
+		let h;
 
-// 		beforeEach(() => {
-// 			h = new MaxHeap();
+		beforeEach(() => {
+			h = new MaxHeap();
 
-// 			h.root = new Node(0, 10);
-// 			h.root.appendChild(new Node(1, 5));
-// 			h.root.appendChild(new Node(2, 7));
-// 			h.root.left.appendChild(new Node(3, 20));
+			h.root = new Node(0, 10);
+			h.root.appendChild(new Node(1, 5));
+			h.root.appendChild(new Node(2, 7));
+			h.root.left.appendChild(new Node(3, 20));
 
-// /**
-//         10                       20
-//        /  \                     /  \
-//       5    7  - shift up ->   10   7
-//      /                        /
-//     20                       5
-// **/
+/**
+        10                       20
+       /  \                     /  \
+      5    7  - shift up ->   10   7
+     /                        /
+    20                       5
+**/
 
-// 			h.parentNodes = [
-// 				h.root.left,
-// 				h.root.right,
-// 				h.root.left.left,
-// 			];
-// 		});
+			h.parentNodes = [
+				h.root.left,
+				h.root.right,
+				h.root.left.left,
+			];
+		});
 
-// 		it('shifts node up until heap property is valid', () => {
-// 			const newRoot = h.root.left.left;
-// 			h.shiftNodeUp(h.root.left.left);
-// 			expect(h.root).to.equal(newRoot);
-// 		});
+		it('shifts node up until heap property is valid', () => {
+			const newRoot = h.root.left.left;
+			h.shiftNodeUp(h.root.left.left);
+			
+			expect(h.root).to.equal(newRoot);
+		});
 
-// 		it('maintants parentNodes in correct state', () => {
-// 			const correctParentNodesOrderAfterShiftUp = [
-// 				h.root,
-// 				h.root.right,
-// 				h.root.left
-// 			]
+		it('maintants parentNodes in correct state', () => {
+			const correctParentNodesOrderAfterShiftUp = [
+				h.root,
+				h.root.right,
+				h.root.left
+			]
 
-// 			h.shiftNodeUp(h.root.left.left);
+			h.shiftNodeUp(h.root.left.left);
 
-// 			expect(h.parentNodes[0]).to.equal(correctParentNodesOrderAfterShiftUp[0]);
-// 			expect(h.parentNodes[1]).to.equal(correctParentNodesOrderAfterShiftUp[1]);
-// 			expect(h.parentNodes[2]).to.equal(correctParentNodesOrderAfterShiftUp[2]);
-// 		});
+			expect(h.parentNodes[0]).to.equal(correctParentNodesOrderAfterShiftUp[0]);
+			expect(h.parentNodes[1]).to.equal(correctParentNodesOrderAfterShiftUp[1]);
+			expect(h.parentNodes[2]).to.equal(correctParentNodesOrderAfterShiftUp[2]);
+		});
 
-// 		it('calls Node.swapWithParent', () => {
-// 			const nodeToShiftUp = h.root.left.left;
-// 			sinon.spy(nodeToShiftUp, 'swapWithParent');
+		it('calls Node.swapWithParent', () => {
+			const nodeToShiftUp = h.root.left.left;
+			sinon.spy(nodeToShiftUp, 'swapWithParent');
 
-// 			h.shiftNodeUp(nodeToShiftUp);
+			h.shiftNodeUp(nodeToShiftUp);
 
-// 			expect(nodeToShiftUp.swapWithParent).to.have.been.calledTwice;
-// 		});
+			expect(nodeToShiftUp.swapWithParent).to.have.been.calledTwice;
+		});
 
-// 		it('calls itself recursively', () => {
-// 			const nodeToShiftUp = h.root.left.left;
-// 			sinon.spy(h, 'shiftNodeUp');
+		it('calls itself recursively', () => {
+			const nodeToShiftUp = h.root.left.left;
+			sinon.spy(h, 'shiftNodeUp');
 
-// 			h.shiftNodeUp(nodeToShiftUp);
+			h.shiftNodeUp(nodeToShiftUp);
 
-// 			expect(h.shiftNodeUp).to.have.been.calledThrice;
-// 			expect(h.shiftNodeUp.firstCall.args[0]).to.equal(nodeToShiftUp);
-// 			expect(h.shiftNodeUp.secondCall.args[0]).to.equal(nodeToShiftUp);
-// 			expect(h.shiftNodeUp.thirdCall.args[0]).to.equal(nodeToShiftUp);
-// 		});
-// 	});
+			expect(h.shiftNodeUp).to.have.been.calledThrice;
+			expect(h.shiftNodeUp.firstCall.args[0]).to.equal(nodeToShiftUp);
+			expect(h.shiftNodeUp.secondCall.args[0]).to.equal(nodeToShiftUp);
+			expect(h.shiftNodeUp.thirdCall.args[0]).to.equal(nodeToShiftUp);
+		});
+	});
 
 	describe('#clear', () => {
 		it('assigns null to root and [] to parentNodes', () => {
@@ -210,100 +211,101 @@ describe('MaxHeap', () => {
 		});
 	});
 
-// 	describe('#pop', () => {
-// 		it('does nothing if heap is empty', () => {
-// 			const h = new MaxHeap();
-// 			expect(() => {
-// 				h.pop();
-// 			}).not.to.throw();
-// 		});
-
-// 		it('returns data associated with root', () => {
-// 			const h = new MaxHeap();
-// 			h.push(42, 15);
-// 			h.push(15, 14);
-// 			h.push(0, 16);
-// 			h.push(100, 100);
-
-// 			expect(h.pop()).to.equal(100);
-// 			expect(h.pop()).to.equal(0);
-// 			expect(h.pop()).to.equal(42);
-// 			expect(h.pop()).to.equal(15);
-// 		});
-
-// 		it('calls detachRoot', () => {
-// 			const h = new MaxHeap();
-// 			h.push(42, 15);
-
-// 			sinon.spy(h, 'detachRoot');
-
-// 			h.pop();
-
-// 			expect(h.detachRoot).to.have.been.called;
-// 		});
-
-// 		it('calls restoreRootFromLastInsertedNode with detached root', () => {
-// 			const fakeDetachedNode = {};
-
-// 			const h = new MaxHeap();
-// 			h.push(42, 15);
-
-// 			sinon.stub(h, 'detachRoot').returns(fakeDetachedNode);
-// 			sinon.spy(h, 'restoreRootFromLastInsertedNode');
-
-// 			h.pop();
-
-// 			expect(h.restoreRootFromLastInsertedNode).to.have.been.calledWith(fakeDetachedNode);
-// 		});
-
-// 		it('calls shiftNodeDown with current heap root', () => {
-// 			const h = new MaxHeap();
-// 			h.push(42, 15);
-// 			h.push(15, 42);
-// 			h.push(100, 100);
-
-// 			const expectedNodeToShiftDown = h.root.right;
-
-// 			sinon.spy(h, 'shiftNodeDown');
-
-// 			h.pop();
-// 			expect(h.shiftNodeDown).to.have.been.calledWith(expectedNodeToShiftDown);
-// 		});
-// 	});
-
-	describe('#detachRoot', () => {
-		let h;
-
-		beforeEach(() => {
-			h = new MaxHeap();
+	describe('#pop', () => {
+		it('does nothing if heap is empty', () => {
+			const h = new MaxHeap();
+			expect(() => {
+				h.pop();
+			}).not.to.throw();
 		});
 
-		it('assigns null to this.root', () => {
-			h.push(42, 15);
-			h.detachRoot();
+		// it('returns data associated with root', () => {
+		// 	const h = new MaxHeap();
+		// 	h.push(42, 15);
+		// 	h.push(15, 14);
+		// 	h.push(0, 16);
+		// 	h.push(100, 100);
 
-			expect(h.root).to.equal(null);
-		});
+		// 	expect(h.pop()).to.equal(100);
+		// 	expect(h.pop()).to.equal(0);
+		// 	expect(h.pop()).to.equal(42);
+		// 	expect(h.pop()).to.equal(15);
+		// });
 
-		it('removes root from parentNodes', () => {
-			h.push(42, 15);
-			h.push(15, 42);
+		// it('calls detachRoot', () => {
+		// 	const h = new MaxHeap();
+		// 	h.push(42, 15);
 
-			h.detachRoot();
+		// 	sinon.spy(h, 'detachRoot');
 
-			expect(h.parentNodes[0].data).to.equal(42);
-			expect(h.parentNodes[0].priority).to.equal(15);
-		});
+		// 	h.pop();
 
-		it('returns detached root', () => {
-			h.push(42, 15);
+		// 	expect(h.detachRoot).to.have.been.called;
+		// });
 
-			const expected = h.root;
-			const actual = h.detachRoot();
+		// it('calls restoreRootFromLastInsertedNode with detached root', () => {
+		// 	const fakeDetachedNode = {};
 
-			expect(actual).to.equal(expected);
-		});
+		// 	const h = new MaxHeap();
+		// 	h.push(42, 15);
+
+		// 	sinon.stub(h, 'detachRoot').returns(fakeDetachedNode);
+		// 	sinon.spy(h, 'restoreRootFromLastInsertedNode');
+
+		// 	h.pop();
+
+		// 	expect(h.restoreRootFromLastInsertedNode).to.have.been.calledWith(fakeDetachedNode);
+		// });
+
+		// it('calls shiftNodeDown with current heap root', () => {
+		// 	const h = new MaxHeap();
+		// 	h.push(42, 15);
+		// 	h.push(15, 42);
+		// 	h.push(100, 100);
+
+		// 	const expectedNodeToShiftDown = h.root.right;
+
+		// 	sinon.spy(h, 'shiftNodeDown');
+
+		// 	h.pop();
+
+		// 	expect(h.shiftNodeDown).to.have.been.calledWith(expectedNodeToShiftDown);
+		// });
 	});
+
+	// describe('#detachRoot', () => {
+	// 	let h;
+
+	// 	beforeEach(() => {
+	// 		h = new MaxHeap();
+	// 	});
+
+	// 	it('assigns null to this.root', () => {
+	// 		h.push(42, 15);
+	// 		h.detachRoot();
+
+	// 		expect(h.root).to.equal(null);
+	// 	});
+
+	// 	it('removes root from parentNodes', () => {
+	// 		h.push(42, 15);
+	// 		h.push(15, 42);
+			
+	// 		h.detachRoot();
+
+	// 		expect(h.parentNodes[0].data).to.equal(42);
+	// 		expect(h.parentNodes[0].priority).to.equal(15);
+	// 	});
+
+	// 	it('returns detached root', () => {
+	// 		h.push(42, 15);
+
+	// 		const expected = h.root;
+	// 		const actual = h.detachRoot();
+
+	// 		expect(actual).to.equal(expected);
+	// 	});
+	// });
 
 // 	describe('#restoreRootFromLastInsertedNode', () => {
 // 		let h;
@@ -363,54 +365,54 @@ describe('MaxHeap', () => {
 
 // 	});
 
-// 	describe('#shiftNodeDown', () => {
-// 		let h;
+	describe('#shiftNodeDown', () => {
+		let h;
 
-// 		beforeEach(() => {
-// 			h = new MaxHeap();
+		beforeEach(() => {
+			h = new MaxHeap();
 
-// 			h.root = new Node(0, 3);
-// 			h.root.appendChild(new Node(1, 20));
-// 			h.root.appendChild(new Node(2, 7));
-// 			h.root.left.appendChild(new Node(3, 5));
+			h.root = new Node(0, 3);
+			h.root.appendChild(new Node(1, 20));
+			h.root.appendChild(new Node(2, 7));
+			h.root.left.appendChild(new Node(3, 5));
 
-// /**
-//           3                        20
-//         /  \                      /  \
-//       20    7  - shift down ->   5    7
-//      /                          /
-//     5                          3
-// **/
+/**
+          3                        20
+        /  \                      /  \
+      20    7  - shift down ->   5    7
+     /                          /
+    5                          3
+**/
 
-// 			h.parentNodes = [
-// 				h.root.left,
-// 				h.root.right,
-// 				h.root.left.left,
-// 			];
-// 		});
+			h.parentNodes = [
+				h.root.left,
+				h.root.right,
+				h.root.left.left,
+			];
+		});
 
-// 		it('shifts node down until heap property is valid', () => {
-// 			const newRoot = h.root.left;
-// 			const newDeepest = h.root;
+		it('shifts node down until heap property is valid', () => {
+			const newRoot = h.root.left;
+			const newDeepest = h.root;
 
-// 			h.shiftNodeDown(h.root);
-// 			expect(h.root).to.equal(newRoot);
-// 			expect(h.root.left.left).to.equal(newDeepest);
-// 		});
+			h.shiftNodeDown(h.root);
+			expect(h.root).to.equal(newRoot);
+			expect(h.root.left.left).to.equal(newDeepest);
+		});
 
-// 		it('maintants parentNodes in correct state', () => {
-// 			const correctParentNodesOrderAfterShiftUp = [
-// 				h.root.left.left,
-// 				h.root.right,
-// 				h.root
-// 			]
+		it('maintants parentNodes in correct state', () => {
+			const correctParentNodesOrderAfterShiftUp = [
+				h.root.left.left,
+				h.root.right,
+				h.root
+			]
 
-// 			h.shiftNodeDown(h.root);
+			h.shiftNodeDown(h.root);
 
-// 			expect(h.parentNodes[0]).to.equal(correctParentNodesOrderAfterShiftUp[0]);
-// 			expect(h.parentNodes[1]).to.equal(correctParentNodesOrderAfterShiftUp[1]);
-// 			expect(h.parentNodes[2]).to.equal(correctParentNodesOrderAfterShiftUp[2]);
-// 		});
+			expect(h.parentNodes[0]).to.equal(correctParentNodesOrderAfterShiftUp[0]);
+			expect(h.parentNodes[1]).to.equal(correctParentNodesOrderAfterShiftUp[1]);
+			expect(h.parentNodes[2]).to.equal(correctParentNodesOrderAfterShiftUp[2]);
+		});
 
 //         it('shifts node down in right direction', () => {
 //             h = new MaxHeap();
@@ -443,27 +445,27 @@ describe('MaxHeap', () => {
 //             expect(h.parentNodes.map(n=>n.priority)).to.deep.equal([5,8,1,6]);
 //         });
 
-// 		it('calls Node.swapWithParent', () => {
-// 			const firstNodeToSwapWith = h.root.left;
-// 			sinon.spy(firstNodeToSwapWith, 'swapWithParent');
+		it('calls Node.swapWithParent', () => {
+			const firstNodeToSwapWith = h.root.left;
+			sinon.spy(firstNodeToSwapWith, 'swapWithParent');
 
-// 			h.shiftNodeDown(h.root);
+			h.shiftNodeDown(h.root);
 
-// 			expect(firstNodeToSwapWith.swapWithParent).to.have.been.calledOnce;
-// 		});
+			expect(firstNodeToSwapWith.swapWithParent).to.have.been.calledOnce;
+		});
 
-// 		it('calls itself recursively', () => {
-// 			const nodeToShiftDown = h.root;
-// 			sinon.spy(h, 'shiftNodeDown');
+		it('calls itself recursively', () => {
+			const nodeToShiftDown = h.root;
+			sinon.spy(h, 'shiftNodeDown');
 
-// 			h.shiftNodeDown(nodeToShiftDown);
+			h.shiftNodeDown(nodeToShiftDown);
 
-// 			expect(h.shiftNodeDown).to.have.been.calledThrice;
-// 			expect(h.shiftNodeDown.firstCall.args[0]).to.equal(nodeToShiftDown);
-// 			expect(h.shiftNodeDown.secondCall.args[0]).to.equal(nodeToShiftDown);
-// 			expect(h.shiftNodeDown.thirdCall.args[0]).to.equal(nodeToShiftDown);
-// 		});
-// 	});
+			expect(h.shiftNodeDown).to.have.been.calledThrice;
+			expect(h.shiftNodeDown.firstCall.args[0]).to.equal(nodeToShiftDown);
+			expect(h.shiftNodeDown.secondCall.args[0]).to.equal(nodeToShiftDown);
+			expect(h.shiftNodeDown.thirdCall.args[0]).to.equal(nodeToShiftDown);
+		});
+	});
 
 // 	describe('#size', () => {
 // 		it('returns current size of heap', () => {
@@ -487,7 +489,7 @@ describe('MaxHeap', () => {
 // 	});
 
 	describe('#isEmpty', () => {
-		it('reutrns true if heap is empty', () => {
+		it('returns true if heap is empty', () => {
 			const h = new MaxHeap();
 			expect(h.isEmpty()).to.equal(true);
 

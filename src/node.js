@@ -55,12 +55,13 @@ class Node {
 
 		// save relations for child and parent
 		const parentOld = this.parent;
-		const childLeft = this.left;
-		const childRight = this.right;
-
 		const parentParent = parentOld.parent;
+
 		const parentLeft = parentOld.left;
 		const parentRight = parentOld.right;
+
+		const childLeft = this.left;
+		const childRight = this.right;
 
 		if (parentOld.left === this) {
 			this.left = parentOld;
@@ -74,7 +75,6 @@ class Node {
 
 		this.parent = parentParent;
 		parentOld.parent = this;
-
 		parentOld.left = childLeft;
 		parentOld.right = childRight;
 
@@ -85,6 +85,9 @@ class Node {
 		if(parentParent && parentParent.right === parentOld){
 			parentParent.right = this;
 		}
+
+		childLeft && (childLeft.parent = parentOld);
+		childRight && (childRight.parent = parentOld);
 	}
 }
 
