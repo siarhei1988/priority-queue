@@ -11,11 +11,11 @@ class PriorityQueue {
 	}
 
 	shift() {
-		const element = this.heap.pop();
+		return this.heap.pop();
 	}
 
 	size() {
-		
+		// TODO: add implementation
 	}
 
 	isEmpty() {

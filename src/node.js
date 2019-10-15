@@ -42,6 +42,12 @@ class Node {
 
 	remove() {
 		if (!this.parent) {
+			this.left = null;
+			this.right = null;
+
+			this.left && (this.left.parent = null);
+			this.right && (this.right.parent = null);
+
 			return;
 		}
 

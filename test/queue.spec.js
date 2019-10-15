@@ -136,6 +136,7 @@ describe('PriorityQueue', () => {
 			expect(q.isEmpty()).to.equal(false);
 
 			q.shift();
+
 			expect(q.isEmpty()).to.equal(true);
 		});
 	});
