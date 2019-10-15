@@ -128,17 +128,24 @@ class MaxHeap {
 	}
 
 	shiftNodeDown(node) {
-		if(!node || !node.left){
+		if(!node){
 			return;
 		}
 
-		const leftNode = node.left;
-
-		if(!node.parent){
-			this.root = leftNode;
+		if(!(node.left || node.right)){
+			return;
 		}
 
-		leftNode.swapWithParent();
+		const leftPriority = node.left && node.left.priority || 0;
+		const rightPriority	= node.right && node.right.priority || 0;
+
+		const changableNode = leftPriority >= rightPriority ? node.left : node.right;
+
+		if(!node.parent){
+			this.root = changableNode;
+		}
+
+		changableNode.swapWithParent();
 
 		this.shiftNodeDown(node);
 	}
