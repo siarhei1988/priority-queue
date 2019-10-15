@@ -7,11 +7,11 @@ class PriorityQueue {
 	}
 
 	push(data, priority) {
-
+		this.heap.push(data, priority);
 	}
 
 	shift() {
-
+		const element = this.heap.pop();
 	}
 
 	size() {
@@ -19,7 +19,7 @@ class PriorityQueue {
 	}
 
 	isEmpty() {
-		
+		return this.heap.isEmpty();
 	}
 }
 

@@ -32,6 +32,7 @@ class MaxHeap {
 
 	push(data, priority) {
 		const newNode = new Node(data, priority);
+
 		this.insertNode(newNode);
 		this.shiftNodeUp(newNode);
 	}
@@ -41,34 +42,25 @@ class MaxHeap {
 			return null;
 		}
 
-		// detachRoot - 1
-		// restoreRootFromLastInsertedNode - 1
+		const detachedRoot = this.detachRoot();
+		this.restoreRootFromLastInsertedNode(detachedRoot);
+
+		return detachedRoot;
 		// shiftNodeDown - 1
 	}
 
 	detachRoot() {
-		const parentNodes = this.parentNodes;
+		const oldRoot = this.root;
 
-		if (parentNodes && parentNodes.length > 0) {
-			const node = parentNodes[parentNodes.length - 1];
-			const parent = node.parent;
+		this.shiftNodeDown(oldRoot);
 
-			if (parent) {
-				if (parent.left === node) {
-					parent.left = null;
-				} else {
-					parent.right = null;
-				}
+		oldRoot.remove();
 
-				node.parent = null;
-			} else {
-				this.root = null;
-			}
-
-			return node;
-		} else {
-			return null;
+		if(oldRoot === this.root){
+			this.root = null;
 		}
+
+		return oldRoot;
 	}
 
 	restoreRootFromLastInsertedNode(detached) {
@@ -88,12 +80,13 @@ class MaxHeap {
 	insertNode(node) {
 		if (!this.root) {
 			this.root = node;
+
 			return;
 		}
 
 		let rootsToHandle = [ this.root ];
 
-		while (rootsToHandle && rootsToHandle.length > 0) {
+		while (rootsToHandle.length > 0) {
 			const roots = [ ...rootsToHandle ];
 			rootsToHandle = [];
 

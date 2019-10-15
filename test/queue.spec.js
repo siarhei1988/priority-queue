@@ -25,12 +25,12 @@ describe('PriorityQueue', () => {
 			q = new Queue(3);
 		});
 
-		// it('calls heap.push with passed data and priority', () => {
-		// 	sinon.spy(q.heap, 'push');
+		it('calls heap.push with passed data and priority', () => {
+			sinon.spy(q.heap, 'push');
 
-		// 	q.push(0, 1);
-		// 	expect(q.heap.push).to.have.been.calledWith(0, 1);
-		// });
+			q.push(0, 1);
+			expect(q.heap.push).to.have.been.calledWith(0, 1);
+		});
 
 		// it('throws an error if queue has max size', () => {
 		// 	q.push(0, 1);
@@ -126,17 +126,17 @@ describe('PriorityQueue', () => {
 // 		});
 // 	});
 
-// 	describe('#isEmpty', () => {
-// 		it('return true if queue is empty', () => {
-// 			const q = new Queue();
+	describe('#isEmpty', () => {
+		it('return true if queue is empty', () => {
+			const q = new Queue();
 
-// 			expect(q.isEmpty()).to.equal(true);
+			expect(q.isEmpty()).to.equal(true);
 
-// 			q.push(0, 1);
-// 			expect(q.isEmpty()).to.equal(false);
+			q.push(0, 1);
+			expect(q.isEmpty()).to.equal(false);
 
-// 			q.shift();
-// 			expect(q.isEmpty()).to.equal(true);
-// 		});
-// 	});
+			q.shift();
+			expect(q.isEmpty()).to.equal(true);
+		});
+	});
 });

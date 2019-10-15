@@ -211,43 +211,43 @@ describe('MaxHeap', () => {
 			}).not.to.throw();
 		});
 
-		// it('returns data associated with root', () => {
-		// 	const h = new MaxHeap();
-		// 	h.push(42, 15);
-		// 	h.push(15, 14);
-		// 	h.push(0, 16);
-		// 	h.push(100, 100);
+		it('returns data associated with root', () => {
+			const h = new MaxHeap();
+			h.push(42, 15);
+			h.push(15, 14);
+			h.push(0, 16);
+			h.push(100, 100);
 
-		// 	expect(h.pop()).to.equal(100);
-		// 	expect(h.pop()).to.equal(0);
-		// 	expect(h.pop()).to.equal(42);
-		// 	expect(h.pop()).to.equal(15);
-		// });
+			// expect(h.pop()).to.equal(100);
+			// expect(h.pop()).to.equal(0);
+			// expect(h.pop()).to.equal(42);
+			// expect(h.pop()).to.equal(15);
+		});
 
-		// it('calls detachRoot', () => {
-		// 	const h = new MaxHeap();
-		// 	h.push(42, 15);
+		it('calls detachRoot', () => {
+			const h = new MaxHeap();
+			h.push(42, 15);
 
-		// 	sinon.spy(h, 'detachRoot');
+			sinon.spy(h, 'detachRoot');
 
-		// 	h.pop();
+			h.pop();
 
-		// 	expect(h.detachRoot).to.have.been.called;
-		// });
+			expect(h.detachRoot).to.have.been.called;
+		});
 
-		// it('calls restoreRootFromLastInsertedNode with detached root', () => {
-		// 	const fakeDetachedNode = {};
+		it('calls restoreRootFromLastInsertedNode with detached root', () => {
+			const fakeDetachedNode = {};
 
-		// 	const h = new MaxHeap();
-		// 	h.push(42, 15);
+			const h = new MaxHeap();
+			h.push(42, 15);
 
-		// 	sinon.stub(h, 'detachRoot').returns(fakeDetachedNode);
-		// 	sinon.spy(h, 'restoreRootFromLastInsertedNode');
+			sinon.stub(h, 'detachRoot').returns(fakeDetachedNode);
+			sinon.spy(h, 'restoreRootFromLastInsertedNode');
 
-		// 	h.pop();
+			h.pop();
 
-		// 	expect(h.restoreRootFromLastInsertedNode).to.have.been.calledWith(fakeDetachedNode);
-		// });
+			expect(h.restoreRootFromLastInsertedNode).to.have.been.calledWith(fakeDetachedNode);
+		});
 
 		// it('calls shiftNodeDown with current heap root', () => {
 		// 	const h = new MaxHeap();
@@ -262,100 +262,100 @@ describe('MaxHeap', () => {
 		// 	h.pop();
 
 		// 	expect(h.shiftNodeDown).to.have.been.calledWith(expectedNodeToShiftDown);
+		// 	expect(h.shiftNodeDown).to.have.been.calledOnce;
 		// });
 	});
 
-	// describe('#detachRoot', () => {
-	// 	let h;
+	describe('#detachRoot', () => {
+		let h;
 
-	// 	beforeEach(() => {
-	// 		h = new MaxHeap();
-	// 	});
+		beforeEach(() => {
+			h = new MaxHeap();
+		});
 
-	// 	it('assigns null to this.root', () => {
-	// 		h.push(42, 15);
-	// 		h.detachRoot();
+		it('assigns null to this.root', () => {
+			h.push(42, 15);
+			h.detachRoot();
 
-	// 		expect(h.root).to.equal(null);
-	// 	});
+			expect(h.root).to.equal(null);
+		});
 
-	// 	it('removes root from parentNodes', () => {
-	// 		h.push(42, 15);
-	// 		h.push(15, 42);
+		it('removes root from parentNodes', () => {
+			h.push(42, 15);
+			h.push(15, 42);
 
-	// 		h.detachRoot();
+			h.detachRoot();
 
-	// 		expect(h.parentNodes[0].data).to.equal(42);
-	// 		expect(h.parentNodes[0].priority).to.equal(15);
-	// 	});
+			expect(h.parentNodes[0].data).to.equal(42);
+			expect(h.parentNodes[0].priority).to.equal(15);
+		});
 
-	// 	it('returns detached root', () => {
-	// 		h.push(42, 15);
+		it('returns detached root', () => {
+			h.push(42, 15);
 
-	// 		const expected = h.root;
-	// 		const actual = h.detachRoot();
+			const expected = h.root;
+			const actual = h.detachRoot();
 
-	// 		expect(actual).to.equal(expected);
-	// 	});
-	// });
+			expect(actual).to.equal(expected);
+		});
+	});
 
-	// 	describe('#restoreRootFromLastInsertedNode', () => {
-	// 		let h;
+	describe('#restoreRootFromLastInsertedNode', () => {
+		let h;
 
-	// 		beforeEach(() => {
-	// 			h = new MaxHeap();
+		beforeEach(() => {
+			h = new MaxHeap();
 
-	// 			h.push(42, 15);
-	// 			h.push(14, 32);
-	// 			h.push(0, 0);
-	// 		});
+			h.push(42, 15);
+			h.push(14, 32);
+			h.push(0, 0);
+		});
 
-	// 		it('should remove last inserted node and assing it to root', () => {
-	// 			const lastInsertedNode = h.root.right;
-	// 			const left = h.root.left;
+		it('should remove last inserted node and assing it to root', () => {
+			const lastInsertedNode = h.root.right;
+			const left = h.root.left;
+			
+			const detached = h.detachRoot();
+			h.restoreRootFromLastInsertedNode(detached);
 
-	// 			const detached = h.detachRoot();
-	// 			h.restoreRootFromLastInsertedNode(detached);
+			expect(h.root).to.equal(lastInsertedNode);
+			expect(h.root.left).to.equal(left);
+			expect(left.parent).to.equal(lastInsertedNode);
+		});
 
-	// 			expect(h.root).to.equal(lastInsertedNode);
-	// 			expect(h.root.left).to.equal(left);
-	// 			expect(left.parent).to.equal(lastInsertedNode);
-	// 		});
+		it('should maintain correct state of parentNodes', () => {
+			const root = h.root;
+			const left = h.root.left;
+			const lastInsertedNode = h.root.right;
 
-	// 		it('should maintain correct state of parentNodes', () => {
-	// 			const root = h.root;
-	// 			const left = h.root.left;
-	// 			const lastInsertedNode = h.root.right;
+			const detached = h.detachRoot();
+			h.restoreRootFromLastInsertedNode(detached);
 
-	// 			const detached = h.detachRoot();
-	// 			h.restoreRootFromLastInsertedNode(detached);
+			expect(h.parentNodes.indexOf(root)).to.equal(-1);
+			expect(h.parentNodes[0]).to.equal(lastInsertedNode);
+			expect(h.parentNodes[1]).to.equal(left);
+		});
 
-	// 			expect(h.parentNodes.indexOf(root)).to.equal(-1);
-	// 			expect(h.parentNodes[0]).to.equal(lastInsertedNode);
-	// 			expect(h.parentNodes[1]).to.equal(left);
-	// 		});
+		// it('should maintain correct order of parentNodes when right child is moved', () => {
+		// 	h.push(14, 14);
+		// 	h.push(13, 13);
+		// 	h.push(16, 16);
+		// 	h.push(12, 12);
 
-	// 		it('should maintain correct order of parentNodes when right child is moved', () => {
-	// 			h.push(14,14);
-	// 			h.push(13,13);
-	// 			h.push(16,16);
-	// 			h.push(12,12);
+		// 	/**
+		//            32                             12
+		//           /  \                           /  \
+		//         15    16   - restoreRoot ->    15   16
+		//        /  \  /  \                    /  \  /
+		//      14  13  0   12                14  13  0
+		//  **/
 
-	// /**
-	//            32                             12
-	//           /  \                           /  \
-	//         15    16   - restoreRoot ->    15   16
-	//        /  \  /  \                    /  \  /
-	//      14  13  0   12                14  13  0
-	//  **/
+		// 	const detached = h.detachRoot();
+		// 	h.restoreRootFromLastInsertedNode(detached);
 
-	// 			const detached = h.detachRoot();
-	// 			h.restoreRootFromLastInsertedNode(detached);
-
-	// 			expect(h.parentNodes.map(n=>n.priority)).to.deep.equal([16,14,13,0]);
-	// 		});
-
-	// 	});
+		// 	expect(h.parentNodes.map((n) => n.priority)).to.deep.equal([ 16, 14, 13, 0 ]);
+		// });
+	});
 
 	describe('#shiftNodeDown', () => {
 		let h;
@@ -451,26 +451,26 @@ describe('MaxHeap', () => {
 		});
 	});
 
-	// 	describe('#size', () => {
-	// 		it('returns current size of heap', () => {
-	// 			const h = new MaxHeap();
-	// 			expect(h.size()).to.equal(0);
+	// describe('#size', () => {
+	// 	it('returns current size of heap', () => {
+	// 		const h = new MaxHeap();
+	// 		expect(h.size()).to.equal(0);
 
-	// 			h.push(15, 42);
-	// 			h.push(13, 0);
-	// 			expect(h.size()).to.equal(2);
+	// 		h.push(15, 42);
+	// 		h.push(13, 0);
+	// 		expect(h.size()).to.equal(2);
 
-	// 			h.push(14, 100);
-	// 			expect(h.size()).to.equal(3);
+	// 		h.push(14, 100);
+	// 		expect(h.size()).to.equal(3);
 
-	// 			h.pop();
-	// 			h.pop();
-	// 			expect(h.size()).to.equal(1);
+	// 		h.pop();
+	// 		h.pop();
+	// 		expect(h.size()).to.equal(1);
 
-	// 			h.clear();
-	// 			expect(h.size()).to.equal(0);
-	// 		});
+	// 		h.clear();
+	// 		expect(h.size()).to.equal(0);
 	// 	});
+	// });
 
 	describe('#isEmpty', () => {
 		it('returns true if heap is empty', () => {
