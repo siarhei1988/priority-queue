@@ -103,8 +103,8 @@ describe('PriorityQueue', () => {
 // 		});
 // 	});
 
-// 	describe('#size', () => {
-// 		it('returns current size of queue', () => {
+	describe('#size', () => {
+		it('returns current size of queue', () => {
 // 			const q = new Queue();
 
 // 			q.push(0, 1);
@@ -123,8 +123,8 @@ describe('PriorityQueue', () => {
 
 // 			q.shift();
 // 			expect(q.size()).to.equal(0);
-// 		});
-// 	});
+		});
+	});
 
 	describe('#isEmpty', () => {
 		it('return true if queue is empty', () => {

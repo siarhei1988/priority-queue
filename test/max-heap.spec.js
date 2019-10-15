@@ -451,26 +451,26 @@ describe('MaxHeap', () => {
 		});
 	});
 
-	// describe('#size', () => {
-	// 	it('returns current size of heap', () => {
-	// 		const h = new MaxHeap();
-	// 		expect(h.size()).to.equal(0);
+	describe('#size', () => {
+		it('returns current size of heap', () => {
+			const h = new MaxHeap();
+			expect(h.size()).to.equal(0);
 
-	// 		h.push(15, 42);
-	// 		h.push(13, 0);
-	// 		expect(h.size()).to.equal(2);
+			h.push(15, 42);
+			h.push(13, 0);
+			expect(h.size()).to.equal(2);
 
-	// 		h.push(14, 100);
-	// 		expect(h.size()).to.equal(3);
+			h.push(14, 100);
+			expect(h.size()).to.equal(3);
 
-	// 		h.pop();
-	// 		h.pop();
-	// 		expect(h.size()).to.equal(1);
+			// h.pop();
+			// h.pop();
+			// expect(h.size()).to.equal(1);
 
-	// 		h.clear();
-	// 		expect(h.size()).to.equal(0);
-	// 	});
-	// });
+			h.clear();
+			expect(h.size()).to.equal(0);
+		});
+	});
 
 	describe('#isEmpty', () => {
 		it('returns true if heap is empty', () => {
