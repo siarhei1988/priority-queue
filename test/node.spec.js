@@ -85,7 +85,7 @@ describe('Node', () => {
 			parent.removeChild(leftChild);
 
 			expect(leftChild.parent).to.equal(null);
-		});
+		})
 	});
 
 	describe('#remove', () => {
@@ -168,7 +168,7 @@ describe('Node', () => {
 			right.swapWithParent();
 
 			expect(left.parent).to.equal(right);
-		});
+		})
 
 		it('updates children of node and parent node', () => {
 			const root = new Node(42, 15);

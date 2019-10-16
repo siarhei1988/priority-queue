@@ -32,15 +32,15 @@ describe('PriorityQueue', () => {
 			expect(q.heap.push).to.have.been.calledWith(0, 1);
 		});
 
-		// it('throws an error if queue has max size', () => {
-		// 	q.push(0, 1);
-		// 	q.push(1, 2);
-		// 	q.push(2, 3);
+		it('throws an error if queue has max size', () => {
+			q.push(0, 1);
+			q.push(1, 2);
+			q.push(2, 3);
 
-		// 	expect(() => {
-		// 		q.push(3, 4);
-		// 	}).to.throw();
-		// });
+			expect(() => {
+				q.push(3, 4);
+			}).to.throw();
+		});
 	});
 
 	describe('#shift', () => {
@@ -136,7 +136,6 @@ describe('PriorityQueue', () => {
 			expect(q.isEmpty()).to.equal(false);
 
 			q.shift();
-
 			expect(q.isEmpty()).to.equal(true);
 		});
 	});
