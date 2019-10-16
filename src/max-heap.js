@@ -29,7 +29,7 @@ class MaxHeap {
 		const oldRoot = this.root;
 		this.root = null;
 
-		if(!(oldRoot.left && oldRoot.right)){
+		if (!(oldRoot.left && oldRoot.right)) {
 			this.parentNodes.splice(0, 1);
 		}
 
@@ -44,13 +44,17 @@ class MaxHeap {
 		const { left: leftNode, right: rightNode } = detached;
 		const lastInsertedNode = this.parentNodes.splice(this.parentNodes.length - 1, 1)[0];
 
-		if(lastInsertedNode){
-			if(lastInsertedNode.parent && lastInsertedNode.parent !== detached){
+		if (lastInsertedNode) {
+			if (
+				lastInsertedNode.parent &&
+				lastInsertedNode.parent !== detached &&
+				this.parentNodes.indexOf(lastInsertedNode.parent) === -1
+			) {
 				this.parentNodes.unshift(lastInsertedNode.parent);
 			}
-		
+
 			lastInsertedNode.remove();
-			
+
 			if (leftNode && leftNode !== lastInsertedNode) {
 				lastInsertedNode.left = leftNode;
 				leftNode.parent = lastInsertedNode;
@@ -60,10 +64,10 @@ class MaxHeap {
 				rightNode.parent = lastInsertedNode;
 			}
 
-			if(!(lastInsertedNode.left && lastInsertedNode.right)){
+			if (!(lastInsertedNode.left && lastInsertedNode.right)) {
 				this.parentNodes.unshift(lastInsertedNode);
 			}
-			
+
 			this.root = lastInsertedNode;
 		}
 	}
@@ -185,19 +189,6 @@ class MaxHeap {
 			return;
 		}
 
-		// const modifyParentNodes = (node, oldParent) => {
-		// 	const oldParentIndex = this.parentNodes.indexOf(oldParent);
-		// 	const nodeIndex = this.parentNodes.indexOf(node);
-
-		// 	if (oldParentIndex > -1) {
-		// 		this.parentNodes.splice(oldParentIndex, 1, node);
-		// 	}
-
-		// 	if (nodeIndex > -1) {
-		// 		this.parentNodes.splice(nodeIndex, 1, oldParent);
-		// 	}
-		// };
-
 		if (!(node.left || node.right)) {
 			return;
 		}
@@ -207,6 +198,10 @@ class MaxHeap {
 		const leftPriority = (node.left && node.left.priority) || 0;
 		const rightPriority = (node.right && node.right.priority) || 0;
 
+		if (node.priority >= leftPriority && node.priority >= rightPriority) {
+			return;
+		}
+
 		const changableNode = leftPriority >= rightPriority ? node.left || node.right : node.right || node.left;
 
 		if (!parent) {
@@ -214,7 +209,25 @@ class MaxHeap {
 		}
 
 		changableNode.swapWithParent();
-		// modifyParentNodes(node, parent);
+
+		//
+		// TODO: make the class method from this local function
+		const modifyParentNodes = (node, oldParent) => {
+			const oldParentIndex = this.parentNodes.indexOf(oldParent);
+			const nodeIndex = this.parentNodes.indexOf(node);
+
+			if (oldParentIndex > -1) {
+				this.parentNodes.splice(oldParentIndex, 1, node);
+			}
+
+			if (nodeIndex > -1) {
+				this.parentNodes.splice(nodeIndex, 1, oldParent);
+			}
+		};
+
+		modifyParentNodes(changableNode, node);
+		//
+
 		this.shiftNodeDown(node);
 	}
 }

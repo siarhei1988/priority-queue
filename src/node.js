@@ -84,11 +84,11 @@ class Node {
 		parentOld.left = childLeft;
 		parentOld.right = childRight;
 
-		if(parentParent && parentParent.left === parentOld){
+		if (parentParent && parentParent.left === parentOld) {
 			parentParent.left = this;
 		}
 
-		if(parentParent && parentParent.right === parentOld){
+		if (parentParent && parentParent.right === parentOld) {
 			parentParent.right = this;
 		}
 

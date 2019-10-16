@@ -85,7 +85,7 @@ describe('Node', () => {
 			parent.removeChild(leftChild);
 
 			expect(leftChild.parent).to.equal(null);
-		})
+		});
 	});
 
 	describe('#remove', () => {
